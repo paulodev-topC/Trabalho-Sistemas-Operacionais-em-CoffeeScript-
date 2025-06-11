@@ -1,3 +1,7 @@
+#Trabalho-Sistemas-Operacionais-em-CoffeeScript#Repositório destinado as aplicações em #CoffeeScript 
+
+
+
 #1
 
 {input, input_password, hash_sha256, load_yaml, save_yaml, file_exists} = require "./stdlib.js"
