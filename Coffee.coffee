@@ -95,9 +95,4 @@ if file_exists("lang.config")
 
 console.log mensagens[idioma] or mensagens["pt"]
 
-#Observações:
-
-#Os áudios para play_sound devem estar gravados #com o nome correspondente ao login ou ação #(paulo.mp3, bemvindo.mp3, etc.).
-
-#Os arquivos contas.yaml, hd.yaml e lang.config #são criados/lidos conforme necessário.
 
