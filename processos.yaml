@@ -1,0 +1,21 @@
+- pid: 1
+  name: chrome
+  state: running
+  io_bound: false
+  uid: 1000
+  affinity: 0
+
+- pid: 2
+  name: vscode
+  state: ready
+  io_bound: false
+  uid: 1000
+  affinity: 1
+
+- pid: 3
+  name: backup
+  state: blocked
+  io_bound: true
+  uid: 0
+  affinity: 0
+  
