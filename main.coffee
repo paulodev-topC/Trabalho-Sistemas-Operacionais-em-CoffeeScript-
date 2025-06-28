@@ -8,6 +8,16 @@ internationalization = require './i18n'
 clearScreen = require './clearScreen'
 listarProcessosPorEstado = require './pcb'
 
+listarIOBound = ->
+  { load_yaml } = require  './stdlib'
+  processos = load_yaml 'processos.yaml'
+  encontrados = false
+  for p in processos when p.io_bound
+    console.log "Nome: #{p.name}, PID: #{p.pid}"
+    encontrado = true
+  unless encontrados
+    console.log "Nenhum processo I/O boundo encontrado."
+
 menu = ->
   console.log "\n===== MENU ====="
   console.log "1 - Criar Conta"
@@ -15,6 +25,7 @@ menu = ->
   console.log "3 - Sorteio"
   console.log "4 - Verificar espaco usado"
   console.log "5 - Listar processos por estado"
+  console.log "6 - Lstar processos I/O bound"
   console.log "0 - Sair"
   internationalization()
   input "Escolha uma opcao: "
@@ -40,7 +51,7 @@ IniciarMenu = ->
           when '2' then listarProcessosPorEstado 'running'
           when '3' then listarProcessosPorEstado 'blocked'
           else console.log "Estado invalido."
-
+      when '6' then listarIOBound()
       when '0'
         console.log "Saindo..."
         process.exit 0
