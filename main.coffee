@@ -8,13 +8,19 @@ internationalization = require './i18n'
 clearScreen = require './clearScreen'
 listarProcessosPorEstado = require './pcb'
 
+# Importa módulo e garante que processList seja a função exportada
+processListModule = require './listarProcessosUsuarios'
+processList = if typeof processListModule is 'function' then processListModule else processListModule.default
+
 listarIOBound = ->
-  { load_yaml } = require  './stdlib'
+  { load_yaml } = require './stdlib'
   processos = load_yaml 'processos.yaml'
   encontrados = false
+
   for p in processos when p.io_bound
     console.log "Nome: #{p.name}, PID: #{p.pid}"
-    encontrado = true
+    encontrados = true
+
   unless encontrados
     console.log "Nenhum processo I/O boundo encontrado."
 
@@ -25,7 +31,8 @@ menu = ->
   console.log "3 - Sorteio"
   console.log "4 - Verificar espaco usado"
   console.log "5 - Listar processos por estado"
-  console.log "6 - Lstar processos I/O bound"
+  console.log "6 - Listar processos I/O bound"
+  console.log "7 - Listar processsos dos usuários"
   console.log "0 - Sair"
   internationalization()
   input "Escolha uma opcao: "
@@ -52,9 +59,11 @@ IniciarMenu = ->
           when '3' then listarProcessosPorEstado 'blocked'
           else console.log "Estado invalido."
       when '6' then listarIOBound()
+      when '7' then processList()
       when '0'
         console.log "Saindo..."
         process.exit 0
       else
         console.log "Opcao inválida. Tente novamente."
+
 IniciarMenu()
